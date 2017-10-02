@@ -1,0 +1,44 @@
+version: '2'
+
+services:
+  zookeeper:
+    image: zookeeper
+    container_name: zookeeper
+
+  nimbus:
+    image: storm
+    container_name: nimbus
+    command: storm nimbus
+    links:
+      - zookeeper
+    ports:
+      - 6627:6627
+
+  supervisor:
+    image: storm
+    container_name: supervisor
+    command: storm supervisor
+    links:
+      - nimbus
+      - zookeeper
+      - cassandra
+    ports:
+      - 9999:9999
+
+  stormui:
+    image: storm
+    container_name: stormui
+    command: storm ui
+    links:
+      - nimbus
+    ports:
+      - 8080:8080
+
+  cassandra:
+    image: cassandra
+    container_name: cassandra
+    ports:
+      - 9042:9042       
+
+networks:
+  default:
