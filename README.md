@@ -21,13 +21,13 @@ To start the Storm cluster use the following command:
 
 When everything is started up, we will build the image of our topology:
 
-    docker build . -t stormsample_uploader
+    docker build . -t phonediscoverytopology_uploader
 
 ### Uploading the topology
 
 Running this image means uploading the topology into the previously created Storm cluster:
 
-    docker run --rm --network stormsample_default stormsample_uploader
+    docker run --rm --network phone-discovery-topology_default phonediscoverytopology_uploader
 
 ### Managing the cluster
 
